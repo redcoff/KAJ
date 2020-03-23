@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <nav>
+        <button id="startButton")>New game</button>
+            <button>Restart</button>
+            <input type="radio" id="controller1" name="controller" value="keyboard"> 
+            <label for="controller1">Keyboard</label>
+            <input type="radio" id="controller2" name="controller" value="mouse" checked> 
+            <label for="controller2">Mouse</label>
+        </nav>
+
+        <div>
+            <p id="score"></p>
+        </div>
+
+        <div id="gameBoard">
+            <img id="crosshair" src="crosshair.png">
+            <div id='loosingFlag'></div>
+            <img id='world' src="world.png" alt="World map">
+        </div>
+
+        
+    </body>
+
+    <script src="main.js" type="module"></script>
+</html>

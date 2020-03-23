@@ -1,0 +1,49 @@
+.cursor-crosshair{
+    cursor: url("crosshair.png") 50 50, auto;
+}
+
+#world {
+    width: 800px;
+    height: auto;
+}
+
+#crosshair {
+    position: absolute;
+    width: 70px;
+    height: auto;
+    display: none;
+}
+
+#gameBoard {
+    display: inline-block;
+    position: relative;
+    z-index : 1;
+ }
+
+ .virus {
+    position: absolute;
+    display: none;
+}
+
+#loosingFlag {
+    background-color: red;
+    opacity: 0.2;
+    height: 471px;
+    display: block;
+    position: absolute; 
+}
+
+#endGame {
+    top: 250px;
+    left: 350px;
+    background-color: red;
+    display: block;
+    position: absolute; 
+    width: 100px;
+    height: 50px;
+    color: white;
+}
+
+
+
+
