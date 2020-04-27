@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)https://seznam.github.io/CVUT/KAJ/cviceni/09/zadani.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>Lecture 09</title>
+
+        <style>
+            section {
+                display: inline-block;
+            }
+
+            svg {
+                background: lightblue;
+                width: 500px;
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h2>Test</h2>
+
+        <svg viewbox="0 15 200 456">
+            <rect x="20" y="30" rx="10" ry="10" width="50" height="50"  fill="red"/>
+            <rect x="50" y="50" rx="50" ry="50" width="50" height="50" fill="yellow"/>    
+            <polyline points="15, 110 40, 170 50, 190 60, 200 65, 250 85, 270 90, 290 95, 300 100, 450" fill="blue"/>
+            <polygon points="50, 160 55, 180 70, 180 60, 190 65, 205 50, 195 35, 205 40, 190 30, 180 45, 180" fill="green"/> 
+            <path d="M50,340 Q24,380 32,480 T50,400" fill="none" stroke="pink" stroke-width="5"/>
+            <circle cx="250" cy="250" r="120" fill="purple"/>  
+            <circle cx="200" cy="200" r="30" fill="white"/>
+            <circle cx="300" cy="200" r="30" fill="white"/>
+            <path d="M250 250 Q230 260 215 240" fill="none" stroke="white" stroke-width="5"/>
+        </svg>
+
+        <h2>SVG Paint</h2>
+        <ul>
+            <li>LMB – draw</li>
+            <li>Ctrl/Cmd + Left mouse button – new path + draw</li>
+            <li>Shift + Left mouse button – clear</li>
+        </ul>
+
+        <svg id="svg1"></svg>
+
+        <script>
+            
+          
+            /*
+                Docs
+                    Positions
+                        https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Positions
+                    Basics
+                        https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Basic_Shapes
+                    Paths
+                        https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
+                    Bezier curves
+                        https://en.wikipedia.org/wiki/B%C3%A9zier_curve
+                    Fills and strokes
+                        https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Fills_and_Strokes
+
+                Excercises
+                    1. Take a look a the docs
+                    2. Draw some basic shapes
+                    3. Play with "viewbox"
+                    4. Draw line paths
+                        - use path element
+                        - try to create it with createElementNS and setAttributeNS
+                    5. Draw bezier paths
+                    6. Draw smiley face
+                    7. Create SVG painter class
+                        a. Listen on svg wrapper click events
+                        b. Draw circle at the position of each click
+                        c. Draw svg path where user clicked
+                        d. Create new path with ctrl/cmd + left mouse button
+                        e. Clear svg with shift + left mouse button
+            */
+
+            class SvgPaint {
+                constructor(target) {
+                    this.svg = document.querySelector(target);
+                    this.svgNs = "http://www.w3.org/2000/svg";
+
+                    this.svg.addEventListener("click", e => this.clickHandler(e));
+                }
+
+                clickHandler(e) {
+                    const x = e.offsetX;
+                    const y = e.offsetY;
+
+                    if (e.ctrlKey || e.metaKey) {
+                        this.createPath();
+                        this.draw(x, y);
+                    } else if (e.shiftKey) {
+                        this.clear();
+                    } else {
+                        if (!this.p) {
+                            this.createPath();
+                        }
+                        this.draw(x, y);
+                    }
+                }
+
+                draw(x, y) {
+                    let d = this.p.getAttributeNS(null, "d");
+                    if (!d) {
+                        d = `M ${x} ${y}`;
+                    } else {
+                        d += ` L ${x} ${y}`;
+                    }
+
+                    console.log("");
+                    console.log("d", d);
+
+                    this.p.setAttributeNS(null, "d", d);
+                    this.drawCircle(x, y);
+                }
+
+                clear() {
+                    this.svg.innerHTML = "";
+                    this.p = null;
+                }
+
+                drawCircle(x, y) {
+                    const c = document.createElementNS(this.svgNs, "circle");
+                    c.setAttributeNS(null, "r", "10");
+                    c.setAttributeNS(null, "cx", x);
+                    c.setAttributeNS(null, "cy", y);
+                    c.setAttributeNS(null, "fill", "pink");
+                    this.svg.appendChild(c);
+                }
+
+                createPath() {
+                    const p = document.createElementNS(this.svgNs, "path");
+                    p.setAttributeNS(null, "stroke", "black");
+                    p.setAttributeNS(null, "stroke-width", "10px");
+                    p.setAttributeNS(null, "stroke-linejoin", "round");
+                    p.setAttributeNS(null, "fill", "transparent");
+
+                    this.svg.appendChild(p);
+                    this.p = p;
+                }
+            }
+
+            new SvgPaint("#svg1");
+
+        
+        
+        </script>
+
+    
+
+
+</body></html>
