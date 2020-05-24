@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="modal popup"></div>
+    <header>
+        <h1>Snake game</h1>
+    </header>
+    <main>
+        <p class="score">Score: <span id="scoreValue">0</span></p>
+        <canvas width="500" height="500" id='gameCanvas'></canvas>
+        <div class="leaderBoard"></div>
+        <div class="minimenu">
+            <button type="button" class="gameButt active">Game</button>
+            <button type="button" class="leaderButt">Leaderboard</button>
+        </div>
+    </main>
+
+
+    <!-- SERVICE WORKER registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(function (reg) {
+
+                if (reg.installing) {
+                    console.log('Service worker se instaluje.');
+                } else if (reg.waiting) {
+                    console.log('Service worker je konecne nainstalovan.');
+                } else if (reg.active) {
+                    console.log('Service worker je dikybohu aktivni.');
+                }
+
+            }).catch(function (error) {
+                // registration failed
+                console.log('service worker chce nastvat Anicku.' + error);
+            });
+        }
+    </script>
+
+    <!-- FIREBASE STUFF -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.14.4/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="/__/firebase/7.14.4/firebase-analytics.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+
+
+    <script src="js/main.js" type="module"></script>
+</body>
+
+</html>
