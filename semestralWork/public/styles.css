@@ -158,6 +158,7 @@ canvas {
     display: block;
 }
 
+/* Modal window */
 .modal {
     position: absolute;
     top: calc(50% - 80px);
@@ -221,6 +222,10 @@ canvas {
     text-align: center;
 }
 
+.heading {
+    font-size: 1.2em;
+    font-weight: bold;
+}
 
 .modal button {
     display: block;
@@ -236,6 +241,7 @@ canvas {
     background: lightsalmon;
 }
 
+/* Leaderboard*/
 .leaderBoard .group {
     display: flex;
 }
@@ -244,11 +250,6 @@ canvas {
     color: white;
     text-align: center;
     overflow-y: scroll;
-}
-
-.heading {
-    font-size: 1.2em;
-    font-weight: bold;
 }
 
 .leaderBoard .group .item {
@@ -282,4 +283,15 @@ canvas {
 
 .leaderBoard .group .heading {
     margin-bottom: 4px; 
+}
+
+/* Media Query - when the screen is 600px or smaller, hide all game stuff, becouse it can't be played
+on such a small screen. */
+@media only screen and (max-width: 800px) {
+    canvas, .modal, .gameButt, p {
+        display: none;
+    }
+    .leaderButt {
+        width: 100%;
+    }
 }
